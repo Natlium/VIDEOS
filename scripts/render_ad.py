@@ -31,6 +31,7 @@ FRAME_COUNT = int(round(FPS * DURATION))
 TRANSITION = 0.48
 SCENE_BOUNDS = (0.0, 4.0, 8.1, 12.5, 16.7, DURATION)
 OUT_DEFAULT = ROOT / "samsung-galaxy-precision-ad.mp4"
+WEBM_DEFAULT = ROOT / "samsung-galaxy-precision-ad.webm"
 POSTER_DEFAULT = ROOT / "samsung-galaxy-precision-ad-poster.jpg"
 FONT_JP_PATH = ROOT / "assets" / "ipaexg.ttf"
 FONT_LATIN_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
@@ -744,6 +745,7 @@ def synthesize_audio(path: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Render the Samsung Galaxy concept advertisement.")
     parser.add_argument("--output", type=Path, default=OUT_DEFAULT, help="MP4 output path")
+    parser.add_argument("--webm-output", type=Path, default=WEBM_DEFAULT, help="VP9 WebM fallback output path")
     parser.add_argument("--poster", type=Path, default=POSTER_DEFAULT, help="Poster image output path")
     parser.add_argument("--fps", type=int, default=FPS, help="Frame rate (default: 24)")
     args = parser.parse_args()
@@ -753,6 +755,7 @@ def main() -> None:
     if not FONT_JP_PATH.exists():
         raise SystemExit(f"Japanese font is missing: {FONT_JP_PATH}")
     args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.webm_output.parent.mkdir(parents=True, exist_ok=True)
     args.poster.parent.mkdir(parents=True, exist_ok=True)
 
     print("Preparing procedural scenes…", flush=True)
@@ -797,7 +800,22 @@ def main() -> None:
         if return_code != 0:
             raise RuntimeError(f"FFmpeg failed: {stderr.decode(errors='replace')}")
 
+    # A VP9/Opus copy gives browsers and players that reject H.264/AAC a second path.
+    webm_command = [
+        ffmpeg, "-hide_banner", "-loglevel", "error", "-y", "-i", str(args.output),
+        "-map", "0:v:0", "-map", "0:a:0", "-c:v", "libvpx-vp9",
+        "-deadline", "good", "-cpu-used", "4", "-row-mt", "1", "-crf", "29", "-b:v", "0",
+        "-pix_fmt", "yuv420p", "-c:a", "libopus", "-b:a", "128k", "-shortest",
+        "-metadata", "title=From Silicon to Galaxy — Samsung Galaxy Concept Film",
+        "-metadata", "comment=Original concept motion graphics; not an official Samsung campaign.",
+        str(args.webm_output),
+    ]
+    webm_result = subprocess.run(webm_command, capture_output=True, text=True)
+    if webm_result.returncode != 0:
+        raise RuntimeError(f"WebM encoding failed: {webm_result.stderr}")
+
     print(f"Wrote {args.output} ({args.output.stat().st_size / (1024 * 1024):.1f} MB)", flush=True)
+    print(f"Wrote {args.webm_output} ({args.webm_output.stat().st_size / (1024 * 1024):.1f} MB)", flush=True)
     print(f"Wrote {args.poster}", flush=True)
 
 

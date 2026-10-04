@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050a14">
+  <meta name="description" content="From Silicon to Galaxy — Samsung Galaxy concept film">
+  <title>From Silicon to Galaxy — Concept Film</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050a14;
+      --panel: #0b1320;
+      --line: rgba(133, 186, 205, .18);
+      --text: #f1f6fc;
+      --muted: #9aabba;
+      --cyan: #75d7e5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 78% 38%, rgba(17, 84, 119, .23), transparent 43%),
+        radial-gradient(ellipse at 13% 90%, rgba(18, 59, 91, .16), transparent 35%),
+        var(--bg);
+      font-family: Inter, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    }
+    .wrap { width: min(1180px, calc(100% - 44px)); margin: 0 auto; }
+    header {
+      height: 82px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--line); letter-spacing: .12em;
+    }
+    .wordmark { font-size: 14px; font-weight: 700; color: #e9f0f6; }
+    .wordmark span { color: #9daebe; font-weight: 400; margin-left: 9px; }
+    .edition { color: var(--cyan); font-size: 10px; letter-spacing: .2em; }
+    main { padding: clamp(42px, 7vw, 82px) 0 62px; }
+    .eyebrow { color: var(--cyan); font-size: 11px; letter-spacing: .23em; margin: 0 0 18px; }
+    h1 { font-size: clamp(31px, 5vw, 56px); line-height: 1.43; font-weight: 500; letter-spacing: .025em; margin: 0; }
+    .intro { margin-bottom: 32px; }
+    .intro p:last-child { color: #a9bacb; font-size: 15px; line-height: 1.9; margin: 16px 0 0; }
+    .player {
+      position: relative; overflow: hidden; border: 1px solid rgba(154, 198, 215, .29);
+      border-radius: 14px; background: #02050b; box-shadow: 0 28px 90px rgba(0, 0, 0, .42);
+    }
+    video { width: 100%; height: auto; display: block; aspect-ratio: 16 / 9; background: #02050b; }
+    .below { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 19px 2px 0; }
+    .specs { color: var(--muted); font-size: 12px; letter-spacing: .07em; }
+    .downloads { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .button {
+      display: inline-flex; align-items: center; min-height: 39px; padding: 0 15px; border: 1px solid var(--line);
+      border-radius: 999px; color: #dce8f1; text-decoration: none; font-size: 12px; transition: border-color .2s, background .2s;
+    }
+    .button:hover { border-color: rgba(117, 215, 229, .72); background: rgba(117, 215, 229, .07); }
+    footer { border-top: 1px solid var(--line); padding: 21px 0 34px; color: #8193a6; font-size: 11px; line-height: 1.8; }
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 28px, 1180px); }
+      header { height: 66px; }
+      .edition { font-size: 9px; }
+      main { padding-top: 42px; }
+      .intro p:last-child { font-size: 14px; }
+      .below { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="wordmark">SAMSUNG <span>Galaxy</span></div>
+      <div class="edition">CONCEPT FILM&nbsp; / &nbsp;2026</div>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="title">
+        <p class="eyebrow">FROM SILICON TO GALAXY</p>
+        <h1 id="title">小さなチップから、<br>一台のスマートフォンへ。</h1>
+        <p>半導体、基板、そして完成形へ。細部を積み重ねていく過程を描いたコンセプト映像です。</p>
+      </section>
+      <div class="player">
+        <video controls playsinline preload="metadata" poster="samsung-galaxy-precision-ad-poster.jpg" aria-label="Samsung Galaxyコンセプト広告動画">
+          <source src="samsung-galaxy-precision-ad.webm" type="video/webm">
+          <source src="samsung-galaxy-precision-ad.mp4" type="video/mp4">
+          お使いのブラウザーでは動画を再生できません。下のリンクからファイルをダウンロードしてください。
+        </video>
+      </div>
+      <div class="below">
+        <div class="specs">22.5 SEC&nbsp; · &nbsp;1920 × 1080&nbsp; · &nbsp;24 FPS&nbsp; · &nbsp;SOUND ON</div>
+        <div class="downloads">
+          <a class="button" href="samsung-galaxy-precision-ad.webm" download>WebM をダウンロード</a>
+          <a class="button" href="samsung-galaxy-precision-ad.mp4" download>MP4 をダウンロード</a>
+        </div>
+      </div>
+    </main>
+    <footer>本映像はコンセプトビジュアルです。端末デザイン・部品・製造表現はイメージであり、特定製品の外観・仕様・実際の製造工程を示すものではありません。Samsung公式広告ではありません。</footer>
+  </div>
+</body>
+</html>

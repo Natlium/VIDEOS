@@ -5,6 +5,8 @@
 ## 納品物
 
 - **`samsung-galaxy-precision-ad.mp4`** — 約22.5秒、1920×1080、24fps、H.264/AAC
+- **`samsung-galaxy-precision-ad.webm`** — ブラウザー互換用のVP9/Opus版
+- **`index.html`** — MP4/WebMを切り替えて再生するプレイヤー
 - **`samsung-galaxy-precision-ad-poster.jpg`** — 動画のエンドカード
 - **`scripts/render_ad.py`** — 手続き型モーショングラフィックスとオリジナルのアンビエント音を生成するソース
 
@@ -27,4 +29,10 @@ python -m pip install -r requirements.txt
 python scripts/render_ad.py
 ```
 
-出力先を変える場合は `--output` と `--poster` を指定できます。
+ブラウザーでプレイヤーを開く場合はリポジトリのルートで静的サーバーを起動します。
+
+```bash
+python -m http.server 8000
+```
+
+`http://localhost:8000/` を開くと、WebMを優先して再生し、未対応の場合はMP4に切り替えます。出力先は `--output`、`--webm-output`、`--poster` で指定できます。
