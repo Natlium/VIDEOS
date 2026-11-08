@@ -1,6 +1,0 @@
-{
-  "relay": 2,
-  "id": "f07eb0a25d1b",
-  "cmd": "uname -a && date -u +%FT%TZ",
-  "at": "2026-11-08T06:30:51Z"
-}
