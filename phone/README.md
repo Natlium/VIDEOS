@@ -80,3 +80,14 @@ curl -H "X-Token: s3cret" http://$PHONE:8080/health
 ## 検証済み (このリポジトリの作業環境)
 
 `--demo` で起動し、全 14 エンドポイント + 認証(401/200)+ 404/400 のステータスを curl で確認済み。
+
+## エージェントと繋ぐ
+
+この sandbox からは tailnet に入れない（`controlplane.tailscale.com` が TLS で切られる）ため、
+「エージェント → スマホ」の直結は不可能。代わりに **GitHub のリポジトリ 1 ファイル**を
+経由する双方向リレーがある。詳細と実測ログは [RELAY.md](./RELAY.md)。
+
+```bash
+export GH_TOKEN=<Contents:write つきトークン>
+python3 relay.py --repo Natlium/VIDEOS        # 常駐。下りコマンドを拾って実行し結果を返す
+```
