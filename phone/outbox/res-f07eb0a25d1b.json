@@ -1,0 +1,10 @@
+{
+  "relay": 2,
+  "id": "f07eb0a25d1b",
+  "cmd": "uname -a && date -u +%FT%TZ",
+  "exit": 0,
+  "seconds": 0.04,
+  "host": "e2b.local",
+  "at": "2026-11-08T06:30:56Z",
+  "stdout": "Linux e2b.local 6.1.158+ #1 SMP PREEMPT_DYNAMIC Mon May 11 18:48:24 UTC 2026 x86_64 GNU/Linux\n2026-11-08T06:30:56Z"
+}
